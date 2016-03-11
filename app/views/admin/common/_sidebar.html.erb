@@ -3,10 +3,10 @@
 		<h3>SourceCode</h3>
 	</div>
 	<% menus = current_admin_user.menus.where("(
-		admin_menus_users.parent_id IS NULL 
-			or 
-		admin_menus_users.parent_id ='') 
-			and 
+		admin_menus_users.parent_id IS NULL
+			or
+		admin_menus_users.parent_id =0)
+			and
 		admin_menus_users.position='side'") %>
 	<% menus.each do |sub| %>
 	<%= g_side_menu sub %>

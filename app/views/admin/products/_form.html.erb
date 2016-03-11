@@ -1,5 +1,5 @@
 <script>
-// 
+//
   function readURL(input) {
     img = $(input).siblings('img');
     if (input.files && input.files[0]) {
@@ -54,14 +54,14 @@
       <label>商品說明</label>
       <div class="fields">
         <div class="ui sixteen wide field">
-        <%= f.input :description, :as => :ckeditor, placeholder: "商品說明", 
+        <%= f.input :description, :as => :ckeditor, placeholder: "商品說明",
             input_html:{
               :ckeditor => {
                 :toolbar => 'Full',
                 :language => 'zh',
                 :autoGrow_onStartup => false,
                 :extraPlugins => 'autogrow,smiley',
-              } 
+              }
             } %>
             <!-- app/assets/javascripts/ckeditor/reinit.js -->
         </div>
@@ -71,7 +71,7 @@
       <h4 class="ui horizontal divider"> 分類設定 </h4>
       <div class="ui grid">
         <%= hidden_field_tag "admin_product[category_ids][]", nil %>
-        <% for category in Admin::Category.all.where("(parent_id IS NULL or parent_id ='')") %>
+        <% for category in Admin::Category.all.where("(parent_id IS NULL or parent_id =0)") %>
           <%= render 'category_fields', f: category %>
         <% end %>
       </div>

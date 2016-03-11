@@ -6,7 +6,7 @@ class CreateAdminSubProducts < ActiveRecord::Migration
       t.integer :qty
       t.string :itemcode
       t.integer :seq
-      t.references :admin_products, index: true, foreign_key: true
+      t.integer :product_id
 
       t.timestamps null: false
     end

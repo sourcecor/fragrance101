@@ -2,7 +2,7 @@ class Admin::MenusController < Admin::BaseController
 	before_action :set_record, :only => [:show, :edit, :update, :destroy]
 
 	def index
-		@menus_grid = initialize_grid(Admin::Menu.where("(parent_id IS NULL or parent_id ='')"), per_page: 15)
+		@menus_grid = initialize_grid(Admin::Menu.where("(parent_id IS NULL or parent_id =0)"), per_page: 15)
 	end
 
 	def new

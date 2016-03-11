@@ -3,17 +3,17 @@
 		<a href="#"><i class="sidebar icon large"></i><span>選單</span></a>
 	</div>
 	<div class="ui container">
-		<%= 
+		<%=
 			content_tag(:a, class: "header item", href: admin_dashboard_index_path) do
 				concat(image_tag("logo.png", class: "logo"))
 				concat(content_tag(:span, "Fragrence"))
 			end
 		%>
 		<% menus = current_admin_user.menus.where("(
-			admin_menus_users.parent_id IS NULL 
-				or 
-			admin_menus_users.parent_id ='') 
-				and 
+			admin_menus_users.parent_id IS NULL
+				or
+			admin_menus_users.parent_id =0)
+				and
 			admin_menus_users.position='top'") %>
 		<% menus.each do |sub| %>
 		<%= g_nav_menu sub %>

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160301123359) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admin_categories", force: :cascade do |t|
     t.integer  "parent_id"
     t.string   "caption"
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "admin_category_products", ["category_id"], name: "index_admin_category_products_on_category_id"
-  add_index "admin_category_products", ["product_id"], name: "index_admin_category_products_on_product_id"
+  add_index "admin_category_products", ["category_id"], name: "index_admin_category_products_on_category_id", using: :btree
+  add_index "admin_category_products", ["product_id"], name: "index_admin_category_products_on_product_id", using: :btree
 
   create_table "admin_groups", force: :cascade do |t|
     t.string   "caption"
@@ -45,8 +48,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "admin_groups_menus", ["group_id"], name: "index_admin_groups_menus_on_group_id"
-  add_index "admin_groups_menus", ["menu_id"], name: "index_admin_groups_menus_on_menu_id"
+  add_index "admin_groups_menus", ["group_id"], name: "index_admin_groups_menus_on_group_id", using: :btree
+  add_index "admin_groups_menus", ["menu_id"], name: "index_admin_groups_menus_on_menu_id", using: :btree
 
   create_table "admin_groups_users", id: false, force: :cascade do |t|
     t.integer  "group_id"
@@ -55,8 +58,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "admin_groups_users", ["group_id"], name: "index_admin_groups_users_on_group_id"
-  add_index "admin_groups_users", ["user_id"], name: "index_admin_groups_users_on_user_id"
+  add_index "admin_groups_users", ["group_id"], name: "index_admin_groups_users_on_group_id", using: :btree
+  add_index "admin_groups_users", ["user_id"], name: "index_admin_groups_users_on_user_id", using: :btree
 
   create_table "admin_menus", force: :cascade do |t|
     t.integer  "parent_id"
@@ -70,17 +73,6 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.integer  "parent_id_id"
   end
 
-  create_table "admin_menus_users", id: false, force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "user_id"
-    t.integer "menu_id"
-    t.integer "parent_id"
-    t.string  "caption"
-    t.string  "action"
-    t.string  "position"
-    t.integer "seq"
-  end
-
   create_table "admin_pictures", force: :cascade do |t|
     t.string   "image"
     t.integer  "seq"
@@ -90,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "admin_pictures", ["imageable_type", "imageable_id"], name: "index_admin_pictures_on_imageable_type_and_imageable_id"
+  add_index "admin_pictures", ["imageable_type", "imageable_id"], name: "index_admin_pictures_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "admin_product_main_pictures", force: :cascade do |t|
     t.string   "image"
@@ -125,12 +117,9 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.integer  "qty"
     t.string   "itemcode"
     t.integer  "seq"
-    t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "admin_sub_products", ["product_id"], name: "index_admin_sub_products_on_admin_products_id"
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -148,8 +137,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.string   "username"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "authentication_providers", force: :cascade do |t|
     t.string   "name"
@@ -157,7 +146,7 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers"
+  add_index "authentication_providers", ["name"], name: "index_name_on_authentication_providers", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -172,8 +161,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at"
   end
 
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "order_details", force: :cascade do |t|
     t.integer  "order_id"
@@ -208,6 +197,14 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.string   "keywords"
+    t.decimal  "min_price"
+    t.decimal  "max_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_authentications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "authentication_provider_id"
@@ -219,8 +216,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "user_authentications", ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id"
-  add_index "user_authentications", ["user_id"], name: "index_user_authentications_on_user_id"
+  add_index "user_authentications", ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id", using: :btree
+  add_index "user_authentications", ["user_id"], name: "index_user_authentications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -242,7 +239,7 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.string   "username"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
