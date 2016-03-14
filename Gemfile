@@ -6,7 +6,8 @@ gem 'semantic-ui-sass'
 gem 'font-awesome-sass',  '~> 4.3'
 # image uploader
 gem 'mini_magick'
-gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+#gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave'
 # html editor
 gem 'ckeditor', github: 'galetahub/ckeditor'
 # console records print well form
