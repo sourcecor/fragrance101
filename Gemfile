@@ -16,7 +16,8 @@ gem 'hirb'
 # nested form
 gem 'cocoon'
 # user authorized
-gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
+#gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
