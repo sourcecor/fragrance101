@@ -9,7 +9,8 @@ gem 'mini_magick'
 #gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave'
 # html editor
-gem 'ckeditor', github: 'galetahub/ckeditor'
+#gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ckeditor'
 # console records print well form
 gem 'hirb'
 # nested form
