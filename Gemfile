@@ -80,7 +80,11 @@ group :development do
 end
 
 group :production do
-
-  gem "rails_12factor"
+  gem 'capistrano'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
+   #gem "rails_12factor"
 
 end
